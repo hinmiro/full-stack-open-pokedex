@@ -13,16 +13,10 @@ jobs:
         run: |
           echo "Hello World!"
 
-  now_it_is_job:
-    runs-on: ubuntu-latest
-    steps:
       - name: Now it is
         run: |
           date
 
-  direcotry_content:
-    runs-on: ubuntu-latest
-    steps:
       - name: Directory content
         run: |
           ls -l
