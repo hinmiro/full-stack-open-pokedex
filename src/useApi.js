@@ -13,6 +13,7 @@ const useApi = (url, mapResults = (result) => result) => {
             .catch(setError)
             .finally(() => setIsLoading(false))
     }, [url])
+    console.log(data)
 
     return { data, isLoading, error }
 }

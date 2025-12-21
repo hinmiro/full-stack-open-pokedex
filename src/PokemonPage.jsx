@@ -1,21 +1,22 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import LoadingSpinner from './LoadingSpinner'
-import { useApi } from './useApi'
 import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
+import useGetPokemon from './getPokemonByName'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
 const PokemonPage = ({ previous, next }) => {
     const { name } = useParams()
+
     const {
         data: pokemon,
         error,
         isLoading,
-    } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
+    } = useGetPokemon(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
-    if (isLoading) {
+    if (isLoading || !pokemon) {
         return <LoadingSpinner />
     }
     if (error) {
@@ -44,7 +45,7 @@ const PokemonPage = ({ previous, next }) => {
                     <Link to={`/pokemon/${previous.name}`}>Previous</Link>
                 )}
                 <Link to="/">Home</Link>
-                {next && <Link to={`/pokemon/${previous.name}`}>Next</Link>}
+                {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
             </div>
             <div className={`pokemon-page pokemon-type-${type.name}`}>
                 <div
