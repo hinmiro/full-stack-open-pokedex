@@ -2,11 +2,15 @@
 
 echo "Build script starting..."
 
+# Install dependencies
+npm install
 # Build
 npm run build
 
-# Start backend
-npm run start-prod
+mkdir /var/www/pokedex
 
-# Start frontend
-npm run start
+cp /full-stack-open-pokedex/dist/index.html /var/www/pokedex/
+cp /full-stack-open-pokedex/dist/bundle.js /var/www/pokedex/
+
+systemctl start pokedex
+journalctl -u pokedex
