@@ -3,6 +3,10 @@ import process from 'node:process'
 
 const app = express()
 
+app.get('/version', (req, res) => {
+    res.send('Version 1.00')
+})
+
 // get the port from env variable
 const PORT = process.env.PORT || 5000
 
