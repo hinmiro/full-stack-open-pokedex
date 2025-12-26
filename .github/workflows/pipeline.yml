@@ -1,9 +1,9 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -27,10 +27,11 @@ jobs:
           npm run test:e2e
 
       - name: Deploy to render
+        if: ${{ github.event_name == 'push' }}
         uses: JorgeLNJunior/render-deploy@v1.4.7
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }}
           api_key: ${{ secrets.RENDER_API_KEY }}
           clear_cache: true
           wait_deploy: true
-          deployment_environment: 'production'
+          deployment_environment: "production"
