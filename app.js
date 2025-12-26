@@ -7,6 +7,10 @@ app.get('/version', (req, res) => {
     res.send('Version 1.00')
 })
 
+app.get('/health', (req, res) => {
+    res.send('Ok')
+})
+
 // get the port from env variable
 const PORT = process.env.PORT || 5000
 
