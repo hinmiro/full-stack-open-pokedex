@@ -1,9 +1,9 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -33,4 +33,4 @@ jobs:
           api_key: ${{ secrets.RENDER_API_KEY }}
           clear_cache: true
           wait_deploy: true
-          deployment_environment: 'production'
+          deployment_environment: "production"
