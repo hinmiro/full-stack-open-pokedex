@@ -41,7 +41,7 @@ jobs:
 
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
