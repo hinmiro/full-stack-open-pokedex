@@ -4,7 +4,7 @@ import process from 'node:process'
 const app = express()
 
 app.get('/version', (req, res) => {
-    res.send('Version 1.00')
+    res.send('Version 1.05')
 })
 
 app.get('/health', (req, res) => {
