@@ -46,6 +46,7 @@ jobs:
           webhookUrl: ${{ secrets.WEBHOOK_URL }}
           username: Notify Bot
           text: Build & Deploy successful
+          description: "All steps passed: lint, build, tests, e2e, and deploy to Render."
           color: '#A8DF8E'
           severity: info
 
@@ -56,6 +57,11 @@ jobs:
           webhookUrl: ${{ secrets.WEBHOOK_URL }}
           username: Notify Bot
           text: Build or Deploy failed
+          description: >
+            Commit: `${{ github.sha }}`
+            Message: "${{ github.event.head_commit.message || github.event.pull_request.title }}"
+            Author: ${{ github.actor }}
+            Link: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
           color: '#FFAAB8'
           severity: error
 
