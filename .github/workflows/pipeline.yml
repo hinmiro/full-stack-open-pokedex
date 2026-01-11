@@ -39,6 +39,30 @@ jobs:
           wait_deploy: true
           deployment_environment: "production"
 
+      - name: Notify Discord (success)
+        uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: success()
+        with:
+          webhookUrl: ${{ secrets.WEBHOOK_URL }}
+          username: Notify Bot
+          text: Build & Deploy successful
+          color: '#A8DF8E'
+          severity: info
+
+      - name: Notify Discord (failure)
+        uses: rjstone/discord-webhook-notify@c2597273488aeda841dd1e891321952b51f7996f
+        if: failure()
+        with:
+          webhookUrl: ${{ secrets.WEBHOOK_URL }}
+          username: Notify Bot
+          text: Build or Deploy failed
+          color: '#FFAAB8'
+          severity: error
+
+
+
+
+
   tag_release:
     needs: [simple_deployment_pipeline]
     if: ${{ github.event_name == 'push' }}
